@@ -79,6 +79,25 @@ spec:
                         Enables the DNS addon in the Tenant Cluster.
                         The registry and the tag are configurable, the image is hard-coded to `coredns`.
                       properties:
+                        imagePullSecrets:
+                          description: imagePullSecrets allows specifying secrets for pulling images in airgap environments.
+                          items:
+                            description: |-
+                              LocalObjectReference contains enough information to let you locate the
+                              referenced object inside the same namespace.
+                            properties:
+                              name:
+                                default: ""
+                                description: |-
+                                  Name of the referent.
+                                  This field is effectively required, but due to backwards compatibility is
+                                  allowed to be empty. Instances of this type with an empty value here are
+                                  almost certainly wrong.
+                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                type: string
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          type: array
                         imageRepository:
                           description: |-
                             ImageRepository sets the container registry to pull images from.
@@ -111,6 +130,25 @@ spec:
                               default: registry.k8s.io/kas-network-proxy/proxy-agent
                               description: AgentImage defines the container image for Konnectivity's agent.
                               type: string
+                            imagePullSecrets:
+                              description: ImagePullSecrets allows specifying secrets for pulling images in airgap environments.
+                              items:
+                                description: |-
+                                  LocalObjectReference contains enough information to let you locate the
+                                  referenced object inside the same namespace.
+                                properties:
+                                  name:
+                                    default: ""
+                                    description: |-
+                                      Name of the referent.
+                                      This field is effectively required, but due to backwards compatibility is
+                                      allowed to be empty. Instances of this type with an empty value here are
+                                      almost certainly wrong.
+                                      More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                    type: string
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              type: array
                             tolerations:
                               default:
                                 - key: CriticalAddonsOnly
@@ -255,6 +293,25 @@ spec:
                         Enables the kube-proxy addon in the Tenant Cluster.
                         The registry and the tag are configurable, the image is hard-coded to `kube-proxy`.
                       properties:
+                        imagePullSecrets:
+                          description: imagePullSecrets allows specifying secrets for pulling images in airgap environments.
+                          items:
+                            description: |-
+                              LocalObjectReference contains enough information to let you locate the
+                              referenced object inside the same namespace.
+                            properties:
+                              name:
+                                default: ""
+                                description: |-
+                                  Name of the referent.
+                                  This field is effectively required, but due to backwards compatibility is
+                                  allowed to be empty. Instances of this type with an empty value here are
+                                  almost certainly wrong.
+                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                type: string
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          type: array
                         imageRepository:
                           description: |-
                             ImageRepository sets the container registry to pull images from.
@@ -5821,6 +5878,25 @@ spec:
                                 type: string
                               type: array
                           type: object
+                        imagePullSecrets:
+                          description: imagePullSecrets allows specifying secrets for pulling images in airgap environments.
+                          items:
+                            description: |-
+                              LocalObjectReference contains enough information to let you locate the
+                              referenced object inside the same namespace.
+                            properties:
+                              name:
+                                default: ""
+                                description: |-
+                                  Name of the referent.
+                                  This field is effectively required, but due to backwards compatibility is
+                                  allowed to be empty. Instances of this type with an empty value here are
+                                  almost certainly wrong.
+                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                type: string
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          type: array
                         nodeSelector:
                           additionalProperties:
                             type: string

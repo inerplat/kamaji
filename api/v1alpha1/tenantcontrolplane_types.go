@@ -178,6 +178,9 @@ type DeploymentSpec struct {
 	//+kubebuilder:default="default"
 	// ServiceAccountName allows to specify the service account to be mounted to the pods of the Control plane deployment
 	ServiceAccountName string `json:"serviceAccountName,omitempty"`
+	// imagePullSecrets allows specifying secrets for pulling images in airgap environments.
+	// +optional
+	ImagePullSecrets []corev1.LocalObjectReference `json:"imagePullSecrets,omitempty"`
 }
 
 // AdditionalVolumeMounts allows mounting additional volumes to the Control Plane components.
@@ -214,6 +217,9 @@ type ImageOverrideTrait struct {
 	// ImageTag allows to specify a tag for the image.
 	// In case this value is set, kubeadm does not change automatically the version of the above components during upgrades.
 	ImageTag string `json:"imageTag,omitempty"`
+	// imagePullSecrets allows specifying secrets for pulling images in airgap environments.
+	// +optional
+	ImagePullSecrets []corev1.LocalObjectReference `json:"imagePullSecrets,omitempty"`
 }
 
 // ExtraArgs allows adding additional arguments to said component.
@@ -248,6 +254,9 @@ type KonnectivityAgentSpec struct {
 	//+kubebuilder:default={{key: "CriticalAddonsOnly", operator: "Exists"}}
 	Tolerations []corev1.Toleration `json:"tolerations,omitempty"`
 	ExtraArgs   ExtraArgs           `json:"extraArgs,omitempty"`
+	// ImagePullSecrets allows specifying secrets for pulling images in airgap environments.
+	// +optional
+	ImagePullSecrets []corev1.LocalObjectReference `json:"imagePullSecrets,omitempty"`
 }
 
 // KonnectivitySpec defines the spec for Konnectivity.

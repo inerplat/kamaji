@@ -233,6 +233,10 @@ func (c *CoreDNS) decodeManifests(ctx context.Context, tcp *kamajiv1alpha1.Tenan
 		config.Parameters.CoreDNSOptions.Tag = tcp.Spec.Addons.CoreDNS.ImageTag
 	}
 
+	if len(tcp.Spec.Addons.CoreDNS.ImagePullSecrets) > 0 {
+		config.Parameters.CoreDNSOptions.ImagePullSecrets = tcp.Spec.Addons.CoreDNS.ImagePullSecrets
+	}
+
 	manifests, err := kubeadm.AddCoreDNS(tcpClient, config)
 	if err != nil {
 		return errors.Wrap(err, "unable to generate manifests")
@@ -361,6 +365,7 @@ func (c *CoreDNS) mutateDeployment(ctx context.Context, tenantClient client.Clie
 		d.Spec.Template.Spec.DNSPolicy = c.deployment.Spec.Template.Spec.DNSPolicy
 		d.Spec.Template.Spec.NodeSelector = c.deployment.Spec.Template.Spec.NodeSelector
 		d.Spec.Template.Spec.ServiceAccountName = c.deployment.Spec.Template.Spec.ServiceAccountName
+		d.Spec.Template.Spec.ImagePullSecrets = c.deployment.Spec.Template.Spec.ImagePullSecrets
 		if d.Spec.Template.Spec.Affinity == nil {
 			d.Spec.Template.Spec.Affinity = &corev1.Affinity{
 				PodAntiAffinity: &corev1.PodAntiAffinity{},

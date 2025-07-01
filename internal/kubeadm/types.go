@@ -9,6 +9,7 @@ import (
 	kubeadmapi "k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm"
 
 	"github.com/clastix/kamaji/internal/utilities"
+	corev1 "k8s.io/api/core/v1"
 )
 
 type Configuration struct {
@@ -54,6 +55,7 @@ type Parameters struct {
 type AddonOptions struct {
 	Repository string
 	Tag        string
+	ImagePullSecrets []corev1.LocalObjectReference `json:"imagePullSecrets,omitempty"`
 }
 
 type KubeletConfiguration struct {

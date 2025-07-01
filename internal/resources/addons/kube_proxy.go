@@ -366,6 +366,7 @@ func (k *KubeProxy) mutateDaemonSet(ctx context.Context, tenantClient client.Cli
 		ds.Spec.Template.Spec.Containers[0].SecurityContext.Privileged = k.daemonSet.Spec.Template.Spec.Containers[0].SecurityContext.Privileged
 		ds.Spec.Template.Spec.NodeSelector = k.daemonSet.Spec.Template.Spec.NodeSelector
 		ds.Spec.Template.Spec.ServiceAccountName = k.daemonSet.Spec.Template.Spec.ServiceAccountName
+		ds.Spec.Template.Spec.ImagePullSecrets = k.daemonSet.Spec.Template.Spec.ImagePullSecrets
 		ds.Spec.Template.Spec.HostNetwork = k.daemonSet.Spec.Template.Spec.HostNetwork
 		ds.Spec.Template.Spec.Tolerations = k.daemonSet.Spec.Template.Spec.Tolerations
 		ds.Spec.Template.Spec.PriorityClassName = k.daemonSet.Spec.Template.Spec.PriorityClassName
@@ -393,6 +394,10 @@ func (k *KubeProxy) decodeManifests(ctx context.Context, tcp *kamajiv1alpha1.Ten
 		config.Parameters.KubeProxyOptions.Tag = tcp.Spec.Addons.KubeProxy.ImageTag
 	} else {
 		config.Parameters.KubeProxyOptions.Tag = tcp.Spec.Kubernetes.Version
+	}
+
+	if len(tcp.Spec.Addons.KubeProxy.ImagePullSecrets) > 0 {
+		config.Parameters.KubeProxyOptions.ImagePullSecrets = tcp.Spec.Addons.KubeProxy.ImagePullSecrets
 	}
 
 	manifests, err := kubeadm.AddKubeProxy(tcpClient, config)

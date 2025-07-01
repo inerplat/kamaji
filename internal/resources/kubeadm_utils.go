@@ -60,6 +60,10 @@ func GetKubeadmManifestDeps(ctx context.Context, client client.Client, tenantCon
 		if len(coreDNS.ImageRepository) > 0 {
 			config.Parameters.CoreDNSOptions.Tag = coreDNS.ImageTag
 		}
+		
+		if len(coreDNS.ImagePullSecrets) > 0 {
+			config.Parameters.CoreDNSOptions.ImagePullSecrets = coreDNS.ImagePullSecrets
+		}
 	}
 	// If the kube-proxy addon is enabled and with overrides, adding it to the kubeadm parameters
 	if kubeProxy := tenantControlPlane.Spec.Addons.KubeProxy; kubeProxy != nil {
@@ -75,6 +79,10 @@ func GetKubeadmManifestDeps(ctx context.Context, client client.Client, tenantCon
 			config.Parameters.KubeProxyOptions.Tag = kubeProxy.ImageTag
 		} else {
 			config.Parameters.KubeProxyOptions.Tag = tenantControlPlane.Spec.Kubernetes.Version
+		}
+
+		if len(kubeProxy.ImagePullSecrets) > 0 {
+			config.Parameters.KubeProxyOptions.ImagePullSecrets = tenantControlPlane.Spec.Addons.KubeProxy.ImagePullSecrets
 		}
 	}
 
