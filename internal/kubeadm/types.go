@@ -4,6 +4,7 @@
 package kubeadm
 
 import (
+	corev1 "k8s.io/api/core/v1"
 	json "github.com/json-iterator/go"
 	clientcmdapiv1 "k8s.io/client-go/tools/clientcmd/api/v1"
 	kubeadmapi "k8s.io/kubernetes/cmd/kubeadm/app/apis/kubeadm"
@@ -52,8 +53,9 @@ type Parameters struct {
 }
 
 type AddonOptions struct {
-	Repository string
-	Tag        string
+	Repository       string
+	Tag              string
+	ImagePullSecrets []corev1.LocalObjectReference `json:"imagePullSecrets,omitempty"`
 }
 
 type KubeletConfiguration struct {

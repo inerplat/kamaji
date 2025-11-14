@@ -89,6 +89,25 @@ spec:
                             ImageTag allows to specify a tag for the image.
                             In case this value is set, kubeadm does not change automatically the version of the above components during upgrades.
                           type: string
+                        imagePullSecrets:
+                          description: imagePullSecrets allows specifying secrets for pulling images in airgap environments.
+                          items:
+                            description: |-
+                              LocalObjectReference contains enough information to let you locate the
+                              referenced object inside the same namespace.
+                            properties:
+                              name:
+                                default: ""
+                                description: |-
+                                  Name of the referent.
+                                  This field is effectively required, but due to backwards compatibility is
+                                  allowed to be empty. Instances of this type with an empty value here are
+                                  almost certainly wrong.
+                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                type: string
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          type: array
                       type: object
                     konnectivity:
                       description: Enables the Konnectivity addon in the Tenant Cluster, required if the worker nodes are in a different network.
@@ -183,6 +202,25 @@ spec:
 
                                 WARNING: for last cut-off releases, the container image could be not available.
                               type: string
+                            imagePullSecrets:
+                              description: ImagePullSecrets allows specifying secrets for pulling images in airgap environments.
+                              items:
+                                description: |-
+                                  LocalObjectReference contains enough information to let you locate the
+                                  referenced object inside the same namespace.
+                                properties:
+                                  name:
+                                    default: ""
+                                    description: |-
+                                      Name of the referent.
+                                      This field is effectively required, but due to backwards compatibility is
+                                      allowed to be empty. Instances of this type with an empty value here are
+                                      almost certainly wrong.
+                                      More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                    type: string
+                                type: object
+                                x-kubernetes-map-type: atomic
+                              type: array
                           type: object
                           x-kubernetes-validations:
                             - message: replicas must be 0 when mode is DaemonSet, and greater than 0 when mode is Deployment
@@ -294,6 +332,25 @@ spec:
                             ImageTag allows to specify a tag for the image.
                             In case this value is set, kubeadm does not change automatically the version of the above components during upgrades.
                           type: string
+                        imagePullSecrets:
+                          description: imagePullSecrets allows specifying secrets for pulling images in airgap environments.
+                          items:
+                            description: |-
+                              LocalObjectReference contains enough information to let you locate the
+                              referenced object inside the same namespace.
+                            properties:
+                              name:
+                                default: ""
+                                description: |-
+                                  Name of the referent.
+                                  This field is effectively required, but due to backwards compatibility is
+                                  allowed to be empty. Instances of this type with an empty value here are
+                                  almost certainly wrong.
+                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                type: string
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          type: array
                       type: object
                   type: object
                 controlPlane:
@@ -6438,6 +6495,25 @@ spec:
                           default: default
                           description: ServiceAccountName allows to specify the service account to be mounted to the pods of the Control plane deployment
                           type: string
+                        imagePullSecrets:
+                          description: imagePullSecrets allows specifying secrets for pulling images in airgap environments.
+                          items:
+                            description: |-
+                              LocalObjectReference contains enough information to let you locate the
+                              referenced object inside the same namespace.
+                            properties:
+                              name:
+                                default: ""
+                                description: |-
+                                  Name of the referent.
+                                  This field is effectively required, but due to backwards compatibility is
+                                  allowed to be empty. Instances of this type with an empty value here are
+                                  almost certainly wrong.
+                                  More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+                                type: string
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          type: array
                         strategy:
                           default:
                             rollingUpdate:

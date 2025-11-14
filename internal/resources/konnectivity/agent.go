@@ -209,6 +209,7 @@ func (r *Agent) mutate(ctx context.Context, tenantControlPlane *kamajiv1alpha1.T
 			"kubernetes.io/os": "linux",
 		}
 		podTemplateSpec.Spec.ServiceAccountName = AgentName
+		podTemplateSpec.Spec.ImagePullSecrets = tenantControlPlane.Spec.Addons.Konnectivity.KonnectivityAgentSpec.ImagePullSecrets
 		podTemplateSpec.Spec.Volumes = []corev1.Volume{
 			{
 				Name: agentTokenName,

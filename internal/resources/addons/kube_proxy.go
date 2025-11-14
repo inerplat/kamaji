@@ -338,6 +338,10 @@ func (k *KubeProxy) decodeManifests(ctx context.Context, tcp *kamajiv1alpha1.Ten
 		config.Parameters.KubeProxyOptions.Tag = tcp.Spec.Kubernetes.Version
 	}
 
+	if len(tcp.Spec.Addons.KubeProxy.ImagePullSecrets) > 0 {
+		config.Parameters.KubeProxyOptions.ImagePullSecrets = tcp.Spec.Addons.KubeProxy.ImagePullSecrets
+	}
+
 	manifests, err := kubeadm.AddKubeProxy(tcpClient, config)
 	if err != nil {
 		return errors.Wrap(err, "unable to generate manifests")

@@ -233,6 +233,10 @@ func (c *CoreDNS) decodeManifests(ctx context.Context, tcp *kamajiv1alpha1.Tenan
 		config.Parameters.CoreDNSOptions.Tag = tcp.Spec.Addons.CoreDNS.ImageTag
 	}
 
+	if len(tcp.Spec.Addons.CoreDNS.ImagePullSecrets) > 0 {
+		config.Parameters.CoreDNSOptions.ImagePullSecrets = tcp.Spec.Addons.CoreDNS.ImagePullSecrets
+	}
+
 	manifests, err := kubeadm.AddCoreDNS(tcpClient, config)
 	if err != nil {
 		return errors.Wrap(err, "unable to generate manifests")

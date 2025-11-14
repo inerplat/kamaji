@@ -80,6 +80,8 @@ func (d Deployment) Build(ctx context.Context, deployment *appsv1.Deployment, te
 	d.setAdditionalVolumes(&deployment.Spec.Template.Spec, tenantControlPlane)
 	d.setVolumes(&deployment.Spec.Template.Spec, tenantControlPlane)
 	d.setServiceAccount(&deployment.Spec.Template.Spec, tenantControlPlane)
+	d.setImagePullSecrets(&deployment.Spec.Template.Spec, tenantControlPlane)
+
 	d.Client.Scheme().Default(deployment)
 }
 
@@ -1106,4 +1108,8 @@ func (d Deployment) setServiceAccount(spec *corev1.PodSpec, tcp kamajiv1alpha1.T
 	}
 
 	spec.ServiceAccountName = "default"
+}
+
+func (d Deployment) setImagePullSecrets(podSpec *corev1.PodSpec, tcp kamajiv1alpha1.TenantControlPlane) {
+	podSpec.ImagePullSecrets = tcp.Spec.ControlPlane.Deployment.ImagePullSecrets
 }
